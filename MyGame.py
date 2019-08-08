@@ -1,8 +1,7 @@
 # ---This is my first Python Project---#
 # -------------------------------------#
-# Last Modified 201990726
+# Last Modified 20190808
 # Author: Lior Trieman
-# Syntax reference link: https://www.youtube.com/watch?v=h4n_ByFuD90"
 
 
 import random
