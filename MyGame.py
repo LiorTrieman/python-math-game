@@ -7,33 +7,36 @@
 
 import random
 import operator
-import sys
 # Initiate Game Variables
 
 correct_answers = 0  # initial number of correct answers to the user:
 wrong_answers_total = 0  # total wrong answers
 wrong_answers_in_a_row = 0  # total wrong answers in a row
-number_of_questions = 10  # total of 30 questions in a game
+NUM_OF_QUESTIONS = 10  # total of 10 questions in a game
 
 # each function generate a questions in a different level of difficulty
 # level_1 = only real answers, number from 0-10 only (+) and (-)
 # level_2 = numbers from 0-50
 # level_3 = numbers from 0-100
 
+MAX_ARG_LEVEL_1 = 10  # variable for max value for lever 1 arg
+
 
 def question_level_1():                  # generate a new random math question
-    arg_1 = random.randint(0, 10)
-    arg_2 = random.randint(0, 10)
+    arg_1 = random.randint(0, MAX_ARG_LEVEL_1)
+    arg_2 = random.randint(0, MAX_ARG_LEVEL_1)
     operators = {"+": operator.add, "-": operator.sub}
     op = random.choice(list(operators.keys()))  # random operation
     current_answer = operators.get(op)(arg_1, arg_2)      # calc the answer
     current_question = ('{} {} {} ?\n'.format(arg_1, op, arg_2))
     return current_question, current_answer
 
+MAX_ARG_LEVEL_2 = 50  # variable for max value for level 2 arg
+
 
 def question_level_2():                  # generate a new random math question
-    arg_1 = random.randint(0, 50)
-    arg_2 = random.randint(0, 50)
+    arg_1 = random.randint(0, MAX_ARG_LEVEL_2)
+    arg_2 = random.randint(0, MAX_ARG_LEVEL_2)
     operators = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv}
     op = random.choice(list(operators.keys()))  # random operation
     current_answer = operators.get(op)(arg_1, arg_2)      # calc the answer
@@ -46,7 +49,8 @@ def rnd_correct_ans_reply():
     return correct_reply
 
 def rnd_wrong_ans_reply():
-    mistake_reply_list = ["Wrong answer! :(","That was a mistake...","Bad Answer, you will do better next one!","Sorry, that's not the answer.."]
+    mistake_reply_list = ["Wrong answer! :(","That was a mistake...","Bad Answer, you will do better next one!",\
+                          "Sorry, that's not the answer.."]
     mistake_reply = random.choice(mistake_reply_list)  # random auto reply
     return mistake_reply
 
@@ -67,7 +71,7 @@ while True:
         continue
 
 # Checking if the user wants to play or leave
-for a_question in range(0, number_of_questions):
+for a_question in range(0, NUM_OF_QUESTIONS):
     if wrong_answers_total < 5 and wrong_answers_in_a_row < 3:
         current_question, current_answer = question_level_1()
         user_answer = input(current_question)
@@ -94,7 +98,7 @@ for a_question in range(0, number_of_questions):
         break
 # End on game - give feedback to the user:
 if game_on:
-    print("Good job! you got ", correct_answers, "correct answers our of ", number_of_questions)
+    print("Good job! you got ", correct_answers, "correct answers our of ", NUM_OF_QUESTIONS)
     print(" total wrong answers:", wrong_answers_total)
 
 
